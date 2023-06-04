@@ -38,14 +38,14 @@ class Tree {
         }
     }
  public:
-    explicit Tree(std::vector<char>&new_vec) {
+    explicit Tree(std::vector<char> new_vec) {
         root = new Node;
         root->c = ' ';
         buildTree(root, new_vec);
         std::vector<char> vector;
         createPerms(root, vector);
     }
-    std::vector <char> getPerm(const Tree & tree, int n);
+    std::vector <char> getPerm(const Tree& tree, int n);
     std::vector<std::vector<char>> getPerms()const {
         return perms;
     }
