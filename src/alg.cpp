@@ -7,9 +7,7 @@
 
 std::vector<char> getPerm(const Tree& tree, int n) {
   std::vector<std::vector<char>> perms = tree.getPerms();
-    if (perms.size() >= n) {
-        return {};
-    } else {
-        return perms[n-1];
-    }
+  if (!(perms.size() < n)) {
+    return perms[n - 1];
+  }
 }
