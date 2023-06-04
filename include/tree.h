@@ -7,15 +7,25 @@
 #include <algorithm>
 #include <queue>
 
+struct Node {
+    char c;
+    std::vector<Node*> vec;
+};
 class Tree {
- public:
-    struct Node {
-        char c;
-        std::vector<Node*> vec;
-    };
+ private:
     Node* root;
     std::vector<std::vector<char>> perms;
-    void createPerms(Node* root, std::vector<char>vector) {
+    void buildTree(Node* root, std::vector<char>& vec) {
+        for (char c : vec) {
+            Node* temp = new Node;
+            temp->c = c;
+            root->vec.push_back(temp);
+            std::vector<char> remains = vec;
+            remains.erase(std::find(remains.begin(), remains.end(), c));
+            buildTree(temp, remains);
+        }
+    }
+    void createPerms(Node * root, std::vector<char>vector) {
         if (!(root->c == ' ')) {
             vector.push_back(root->c);
         }
@@ -27,27 +37,17 @@ class Tree {
             perms.push_back(vector);
         }
     }
-    explicit Tree(std::vector<char> new_vec) {
+ public:
+    explicit Tree(std::vector<char>&new_vec) {
         root = new Node;
         root->c = ' ';
         buildTree(root, new_vec);
         std::vector<char> vector;
         createPerms(root, vector);
     }
-    std::vector <char> getPerm(const Tree& tree, int n);
-    void buildTree(Node* root, std::vector<char>& vec) {
-        for (char c : vec) {
-            Node* temp = new Node;
-            temp->c = c;
-            root->vec.push_back(temp);
-            std::vector<char> remains = vec;
-            remains.erase(std::find(remains.begin(), remains.end(), c));
-            buildTree(temp, remains);
-        }
-    }
- std::vector<std::vector<char>> getPerms()const {
+    std::vector <char> getPerm(const Tree & tree, int n);
+    std::vector<std::vector<char>> getPerms()const {
         return perms;
     }
 };
-
 #endif  // INCLUDE_TREE_H_
