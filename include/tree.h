@@ -7,15 +7,14 @@
 #include <string>
 #include <algorithm>
 #include <queue>
-
 class Tree {
-private:
+ private:
     struct Node {
         char c;
         std::vector<Node*> vec;
     };
     Node* root;
-    std::vector<std::vector<char>>perms;
+    std::vector<std::vector<char>> perms;
     void createPerms(Node* root, std::vector<char>vector) {
         if (!(root->c == ' ')) {
             vector.push_back(root->c);
@@ -28,8 +27,9 @@ private:
             perms.push_back(vector);
         }
     }
-public:
-    Tree(std::vector<char> new_vec) {
+
+ public:
+    explicit Tree(std::vector<char> new_vec) {
         root = new Node;
         root->c = ' ';
         buildTree(root, new_vec);
@@ -38,7 +38,6 @@ public:
     }
     std::vector <char> getPerm(const Tree& tree, int n);
     void buildTree(Node* root, std::vector<char>& vec) {
-
         for (char c : vec) {
             Node* temp = new Node;
             temp->c = c;
