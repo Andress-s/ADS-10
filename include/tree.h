@@ -8,7 +8,7 @@
 #include <queue>
 
 class Tree {
- private:
+ public:
     struct Node {
         char c;
         std::vector<Node*> vec;
@@ -28,7 +28,6 @@ class Tree {
             perms.push_back(vector);
         }
     }
- public:
     Tree(std::vector<char> new_vec) {
         root = new Node;
         root->c = ' ';
