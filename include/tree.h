@@ -15,7 +15,9 @@ class Tree {
     };
     Node* root;
     std::vector<std::vector<char>>perms;
-
+    std::vector<std::vector<char>> getPerms()const {
+        return perms;
+    }
     void createPerms(Node* root, std::vector<char>vector) {
         if (!(root->c == ' ')) {
             vector.push_back(root->c);
@@ -45,9 +47,6 @@ class Tree {
             remains.erase(std::find(remains.begin(), remains.end(), c));
             buildTree(temp, remains);
         }
-    }
-    std::vector<std::vector<char>> getPerms()const {
-        return perms;
     }
 };
 
