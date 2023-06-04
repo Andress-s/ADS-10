@@ -32,19 +32,19 @@ class Tree {
     explicit Tree(std::vector<char> new_vec) {
         root = new Node;
         root->c = ' ';
-        buildTree(root, new_vec);
+        buildTree(root, &new_vec);
         std::vector<char> vector;
         createPerms(root, vector);
     }
     std::vector <char> getPerm(const Tree& tree, int n);
-    void buildTree(Node* root, std::vector<char>& vec) {
-        for (char c : vec) {
+    void buildTree(Node* root, std::vector<char>* vec) {
+        for (char c : *vec) {
             Node* temp = new Node;
             temp->c = c;
             root->vec.push_back(temp);
-            std::vector<char> remains = vec;
+            std::vector<char> remains = *vec;
             remains.erase(std::find(remains.begin(), remains.end(), c));
-            buildTree(temp, remains);
+            buildTree(temp, &remains);
         }
     }
     std::vector<std::vector<char>> getPerms()const {
